@@ -16,13 +16,16 @@ def main(args):
     names = [n.strip() for n in args.names.split(',') if n.strip()]
 
     for name in tqdm(names):
-        GT_Pose_Path = GT_POSE_BASE_DIR / f"{name}.pkl.bz2"
-        
         if "others" in name:
             Subset_Name = GT_DATA_BASE_DIR.parent / GT_DATA_BASE_DIR.parts[-1].replace("COPE119", "UOPE56")
+            Subset_Pose_Name = GT_POSE_BASE_DIR.parent / GT_POSE_BASE_DIR.parts[-1].replace("COPE119", "UOPE56")
         else:
             Subset_Name = GT_DATA_BASE_DIR
+            Subset_Pose_Name = GT_POSE_BASE_DIR
+        print(Subset_Name)
+        print(Subset_Pose_Name)
         GT_Data_Path = Subset_Name / name.split('_')[0] / name
+        GT_Pose_Path = Subset_Pose_Name / f"{name}.pkl.bz2"
         CAD_Model_Path = GT_Data_Path / "model" / "Model.obj"
 
         obj_mesh = load_obj_from_path(CAD_Model_Path)
@@ -90,11 +93,8 @@ def main(args):
         
 if __name__ == "__main__":
     
-    GT_POSE_BASE_DIR = Path("~/Projects/Dyna-ROPE-Data-Processer/DynaOPETs_GroundTruth/global_ekf_smoothed").expanduser()
-    # COPE119
-    GT_DATA_BASE_DIR = Path("~/Datasets/DynOPETs/COPE119").expanduser() 
-    # UOPE56
-    # GT_DATA_BASE_DIR = Path("~/Datasets/DynOPETs/UOPE56").expanduser()
+    GT_POSE_BASE_DIR = Path("~/DynOPETs/COPE119/groundtruth/").expanduser()
+    GT_DATA_BASE_DIR = Path("~/DynOPETs/COPE119/").expanduser() 
     
     parser = argparse.ArgumentParser()
     parser.add_argument("--names",'-ns', type=str, help="comma(,) separated list of names", default="bottle_00, bottle_01")

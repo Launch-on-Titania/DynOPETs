@@ -54,7 +54,15 @@ pip install -r requirements.txt
 
 ### Object Pose Visualization Tool
 ```
-python visualize_pose.py 
+python visulization_tools/runner_rendering.py --show_axis --save_mode video --names "bottle_00, bottle_01"
+
+# Parameters:
+ --names, -ns: Comma-separated list of object names to render (default: "bottle_00, bottle_01")
+ --output_dir, -od: Output directory for rendered results (default: "results")
+ --device, -d: Device to use for rendering (default: "cuda")
+ --show_axis: Show coordinate axis on rendered images (flag)
+ --save_mode, -sm: Output format - "video" or "images" (default: "video")
+ 
 ```
 
 ### Point Cloud Generation Tool
