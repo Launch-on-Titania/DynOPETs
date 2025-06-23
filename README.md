@@ -65,62 +65,53 @@ python visulization_tools/runner_rendering.py --show_axis --save_mode video --na
  --save_mode, -sm: Output format - "video" or "images" (default: "video")
  
 ```
-### Visualization Results
+<!-- ### Visualization Results
 
 <p align="center">
   <table>
     <tr>
       <td align="center">
-        <video src="assets/objects/bottle.mp4" alt="Bottle" width="250px" controls autoplay loop muted>
-        </video>
+        <img src="assets/objects/bottle.gif" alt="Bottle" width="250px">
         <br><em>Bottle</em>
       </td>
       <td align="center">
-        <video src="assets/objects/bowl.mp4" alt="Bowl" width="250px" controls autoplay loop muted>
-        </video>
+        <img src="assets/objects/bowl.gif" alt="Bowl" width="250px">
         <br><em>Bowl</em>
       </td>
       <td align="center">
-        <video src="assets/objects/camera.mp4" alt="Camera" width="250px" controls autoplay loop muted>
-        </video>
+        <img src="assets/objects/camera.gif" alt="Camera" width="250px">
         <br><em>Camera</em>
       </td>
     </tr>
     <tr>
       <td align="center">
-        <video src="assets/objects/can.mp4" alt="Can" width="250px" controls autoplay loop muted>
-        </video>
+        <img src="assets/objects/can.gif" alt="Can" width="250px">
         <br><em>Can</em>
       </td>
       <td align="center">
-        <video src="assets/objects/laptop.mp4" alt="Laptop" width="250px" controls autoplay loop muted>
-        </video>
+        <img src="assets/objects/laptop.gif" alt="Laptop" width="250px">
         <br><em>Laptop</em>
       </td>
       <td align="center">
-        <video src="assets/objects/mug.mp4" alt="Mug" width="250px" controls autoplay loop muted>
-        </video>
+        <img src="assets/objects/mug.gif" alt="Mug" width="250px">
         <br><em>Mug</em>
       </td>
     </tr>
     <tr>
       <td align="center">
-        <video src="assets/objects/others0.mp4" alt="Others" width="250px" controls autoplay loop muted>
-        </video>
+        <img src="assets/objects/others0.gif" alt="Others" width="250px">
         <br><em>Others</em>
       </td>
       <td align="center">
-        <video src="assets/objects/others1.mp4" alt="Others" width="250px" controls autoplay loop muted>
-        </video>
+        <img src="assets/objects/others1.gif" alt="Others" width="250px">
         <br><em>Others</em>
       </td>
       <td align="center">
-        <video src="assets/objects/others2.mp4" alt="Others" width="250px" controls autoplay loop muted>
-        </video>
+        <img src="assets/objects/others2.gif" alt="Others" width="250px">
         <br><em>Others</em>
       </td>
     </tr>  </table>
-</p>
+</p> -->
 
 ### Point Cloud Generation Tool
 
@@ -168,7 +159,7 @@ bottle (example)
   │           └── Model.obj
  ...
 ```
-### COPE119 [Trainset](COPE119_subset/COPE119_trainset_list.txt), [Testset](COPE119_subset/COPE119_testset_list.txt) 
+### COPE119 [Trainset](COPE119/COPE119_trainset_list.txt), [Testset](COPE119/COPE119_testset_list.txt) 
 
 
 
