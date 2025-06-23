@@ -8,9 +8,10 @@ Xiangting Meng* · Jiaqi Yang* · Mingshu Chen · Chenxin Yan · Yujiao Shi · W
 </p>
 
 <p align="center" style="font-size: larger;">
+  <a href="https://stay332.github.io/DynOPETs"><strong>Project Page</strong></a> |
+  <a href="https://www.youtube.com/watch?v=hCOwqutWoLI"><strong>Video</strong></a> |
   <a href="https://arxiv.org/pdf/2503.19625"><strong>Paper</strong></a> | 
-  <a href="https://www.youtube.com/watch?v=hCOwqutWoLI"><strong>Video</strong></a> | 
-  <a href="https://stay332.github.io/DynOPETs"><strong>Project Page</strong></a>
+  <a href="https://stay332.github.io/DynOPETs/assets/pdf/supp.pdf"><strong>Supplementary</strong></a>
 </p>
 <p align="center">
   <img src="assets/demo.gif" alt="DynOPETs Demo GIF" width="85%">
@@ -64,11 +65,67 @@ python visulization_tools/runner_rendering.py --show_axis --save_mode video --na
  --save_mode, -sm: Output format - "video" or "images" (default: "video")
  
 ```
+### Visualization Results
+
+<p align="center">
+  <table>
+    <tr>
+      <td align="center">
+        <video src="assets/objects/bottle.mp4" alt="Bottle" width="250px" controls autoplay loop muted>
+        </video>
+        <br><em>Bottle</em>
+      </td>
+      <td align="center">
+        <video src="assets/objects/bowl.mp4" alt="Bowl" width="250px" controls autoplay loop muted>
+        </video>
+        <br><em>Bowl</em>
+      </td>
+      <td align="center">
+        <video src="assets/objects/camera.mp4" alt="Camera" width="250px" controls autoplay loop muted>
+        </video>
+        <br><em>Camera</em>
+      </td>
+    </tr>
+    <tr>
+      <td align="center">
+        <video src="assets/objects/can.mp4" alt="Can" width="250px" controls autoplay loop muted>
+        </video>
+        <br><em>Can</em>
+      </td>
+      <td align="center">
+        <video src="assets/objects/laptop.mp4" alt="Laptop" width="250px" controls autoplay loop muted>
+        </video>
+        <br><em>Laptop</em>
+      </td>
+      <td align="center">
+        <video src="assets/objects/mug.mp4" alt="Mug" width="250px" controls autoplay loop muted>
+        </video>
+        <br><em>Mug</em>
+      </td>
+    </tr>
+    <tr>
+      <td align="center">
+        <video src="assets/objects/others0.mp4" alt="Others" width="250px" controls autoplay loop muted>
+        </video>
+        <br><em>Others</em>
+      </td>
+      <td align="center">
+        <video src="assets/objects/others1.mp4" alt="Others" width="250px" controls autoplay loop muted>
+        </video>
+        <br><em>Others</em>
+      </td>
+      <td align="center">
+        <video src="assets/objects/others2.mp4" alt="Others" width="250px" controls autoplay loop muted>
+        </video>
+        <br><em>Others</em>
+      </td>
+    </tr>  </table>
+</p>
 
 ### Point Cloud Generation Tool
 
 ```
-python generate_point_cloud.py 
+python cloud_generater.py --subset COPE119 --seqs bottle_00
 ```
 
 
@@ -98,7 +155,7 @@ DynOPETs
           └── groundtruth
 
 bottle (example)
-  ├── bottle_05
+  ├── bottle_00
   │     ├── cam_annotations 
   │     │         ├── gripper2base.npy
   │     │         └── gripper_tstamps.npy
@@ -111,35 +168,39 @@ bottle (example)
   │           └── Model.obj
  ...
 ```
-### COPE119 Training Set
-```
-- 'bottle_00', 'bottle_05', 'bottle_06', 'bottle_08', 'bottle_09', 'bottle_10','bottle_12', 'bottle_14', 'bottle_15', 'bottle_16', 'bottle_17', 'bottle_18', 'bottle_19', 'bottle_20', 'bottle_21', 'bottle_22', 'bottle_24', 'bottle_25', 'bottle_26', 'bottle_27', 'bottle_28', 'bottle_29',
+### COPE119 [Trainset](COPE119_subset/COPE119_trainset_list.txt), [Testset](COPE119_subset/COPE119_testset_list.txt) 
 
-- 'bowl_00', 'bowl_01', 'bowl_02', 'bowl_04', 'bowl_05', 'bowl_07', 'bowl_08', 'bowl_09', 'bowl_12', 'bowl_14', 'bowl_15', 'bowl_16', 'bowl_17', 'bowl_19', 'bowl_20',
 
-- 'camera_00', 'camera_02', 'camera_03', 'camera_06', 'camera_07', 'camera_08',
 
-- 'can_00', 'can_02', 'can_04', 'can_05', 'can_06', 'can_07', 'can_08', 'can_10', 'can_11', 'can_12', 'can_16', 'can_17', 'can_18', 'can_19', 'can_21',
 
-- 'laptop_01', 'laptop_02', 'laptop_03', 'laptop_05', 'laptop_07', 'laptop_08', 'laptop_10', 'laptop_11',
+<!-- ```
+- bottle (00, 05, 06, 08, 09, 10, 12, 14, 15, 16, 17, 18, 19, 20, 21, 22, 24, 25, 26, 27, 28, 29)
 
-- 'mug_00', 'mug_02', 'mug_04', 'mug_05', 'mug_07', 'mug_09', 'mug_10', 'mug_13', 'mug_15', 'mug_16', 'mug_17', 'mug_18', 'mug_19', 'mug_20', 'mug_21', 'mug_22', 'mug_23', 'mug_24'
-```
+- bowl (00, 01, 02, 04, 05, 07, 08, 09, 12, 14, 15, 16, 17, 19, 20)
 
-### COPE119 Test Set
-```
-- 'bottle_02', 'bottle_03', 'bottle_04', 'bottle_05', 'bottle_08', 'bottle_12', 'bottle_14', 'bottle_24',
+- camera (00, 02, 03, 06, 07, 08)
 
-- 'bowl_04', 'bowl_07', 'bowl_11', 'bowl_12', 'bowl_14', 'bowl_19',
+- can (00, 02, 04, 05, 06, 07, 08, 10, 11, 12, 16, 17, 18, 19, 21)
 
-- 'camera_02', 'camera_05', 'camera_06',
+- laptop (01, 02, 03, 05, 07, 08, 10, 11)
 
-- 'can_02', 'can_04', 'can_10', 'can_14', 'can_15', 'can_16', 'can_21',
+- mug (00, 02, 04, 05, 07, 09, 10, 13, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24)
+``` -->
 
-- 'laptop_01', 'laptop_05', 'laptop_07', 'laptop_10',
+### 
+<!-- ```
+- bottle (02, 03, 04, 05, 08, 12, 14, 24)
 
-- 'mug_02', 'mug_04', 'mug_07', 'mug_09', 'mug_12', 'mug_13', 'mug_15'
-```
+- bowl (04, 07, 11, 12, 14, 19)
+
+- camera (02, 05, 06)
+
+- can (02, 04, 10, 14, 15, 16, 21)
+
+- laptop (01, 05, 07, 10)
+
+- mug (02, 04, 07, 09, 12, 13, 15)
+``` -->
 
 ## Devices & Softwares
 
@@ -152,6 +213,9 @@ bottle (example)
 
   [**Structure Sensor Record App**](https://github.com/Launch-on-Titania/Structure-Sensor-Record)
 
+  <p align="center">
+    <img src="assets/ss_viewer.jpeg" alt="Structure Sensor Record App" width="90%">
+  </p>
 
 - Motion Capture System (for camera pose only): [OptiTrack](https://optitrack.com/) Motive
 

@@ -93,7 +93,7 @@ def main(args):
         
 if __name__ == "__main__":
     
-    GT_POSE_BASE_DIR = Path("~/Datasets/DynOPETs/COPE119/groundtruth/").expanduser()
+    GT_POSE_BASE_DIR = Path("~/Projects/Dyna-ROPE-Data-Processer/DynaOPETs_GroundTruth/global_ekf_smoothed").expanduser()
     GT_DATA_BASE_DIR = Path("~/Datasets/DynOPETs/COPE119/").expanduser() 
     
     parser = argparse.ArgumentParser()
