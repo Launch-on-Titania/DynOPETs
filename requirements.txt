@@ -1,0 +1,14 @@
+numpy==1.26.3
+ipdb==0.13.13
+ipython==8.32.0
+scipy==1.15.1
+torch==2.1.0
+torchmetrics==1.6.3
+torchvision==0.16.0
+tornado==6.4.2
+tqdm @ file:///home/conda/feedstock_root/build_artifacts/tqdm_1662214488106/work
+trimesh==4.6.1
+importlib_metadata==8.6.1
+opencv-python==4.11.0.86
+pytorch-lightning==2.5.0.post0
+pytorch3d==0.7.5
