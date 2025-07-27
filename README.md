@@ -19,6 +19,8 @@ Xiangting Meng* · Jiaqi Yang* · Mingshu Chen · Chenxin Yan · Yujiao Shi · W
 <!-- 🚧 Dataset coming soon! We are actively organizing and refining the data for public release. Stay tuned! -->
 
 ## Updates
+- [July 23, 2025] 🎉🎉 DynOPETs is now accepted on RA-L 2025. 
+
 - [June 23, 2025] 🎉 DynOPETs is now open source! We also provide visualization tools for rendering object models to facilitate learning and usage.
 
 
