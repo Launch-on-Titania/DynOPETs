@@ -1,4 +1,5 @@
 import glob
+from sre_compile import NOT_LITERAL_LOC_IGNORE
 import cv2
 import numpy as np
 import open3d as o3d
@@ -92,9 +93,9 @@ def annotate_cope119(root_dir, gt_pose_dir):
         class_id = mask[:, :, 2][mask[:, :, 2] != 255][0]
         bbox = [y1, x1, y2, x2]
         
-        # TODO:direct load the gt poses
-        # rotation = R
-        # translation = T
+        # TODO: direct load the gt poses
+        rotation = None
+        translation = None
         # write results
         gts = {}
         gts['class_ids'] = np.array([class_id])    # int list, 1 to 6

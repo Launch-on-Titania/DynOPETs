@@ -1,5 +1,9 @@
 <h1 align="center">Dyn<span style="color: green;">OPETs</span>: A Versatile Benchmark for Dynamic <span style="color: green;">O</span>bject <span style="color: green;">P</span>ose <span style="color: green;">E</span>stimation and <span style="color: green;">T</span>racking in Moving Camera <span style="color: green;">S</span>enarios</h1>
 
+<p align="center" style="font-size: larger; color: #d73027; font-weight: bold;">
+🎉 Accepted at RA-L 2025! 🎉
+</p>
+
 <p align="center" style="font-size: larger;">
 Xiangting Meng* · Jiaqi Yang* · Mingshu Chen · Chenxin Yan · Yujiao Shi · Wenchao Ding · Laurent Kneip
 </p>
@@ -13,47 +17,130 @@ Xiangting Meng* · Jiaqi Yang* · Mingshu Chen · Chenxin Yan · Yujiao Shi · W
   <a href="https://arxiv.org/pdf/2503.19625"><strong>Paper</strong></a> | 
   <a href="https://stay332.github.io/DynOPETs/assets/pdf/supp.pdf"><strong>Supplementary</strong></a>
 </p>
+
 <p align="center">
   <img src="assets/demo.gif" alt="DynOPETs Demo GIF" width="85%">
 </p>
-<!-- 🚧 Dataset coming soon! We are actively organizing and refining the data for public release. Stay tuned! -->
-
-## Updates
-- [July 23, 2025] 🎉🎉 DynOPETs is now accepted on RA-L 2025. 
-
-- [June 23, 2025] 🎉 DynOPETs is now open source! We also provide visualization tools for rendering object models to facilitate learning and usage.
-
 
 ---
-## DynOPETs Datasets Overview
+
+## 📢 Updates
+
+- **[July 22, 2025]** 🎉🎉 DynOPETs is now accepted on RA-L 2025.
+- **[June 23, 2025]** 🎉 DynOPETs is now open source! We also provide visualization tools for rendering object models to facilitate learning and usage.
+
+---
+
+## 📊 DynOPETs Datasets Overview
 
 <p align="center">
   <img src="assets/cover.png" alt="DynOPETs Cover Image" width="95%">
 </p>
 
-**DynOPETs** DynOPETs is a real-world RGB-D dataset designed for object pose estimation and tracking in dynamic scenes with moving cameras.
+**DynOPETs** is a real-world RGB-D dataset designed for object pose estimation and tracking in dynamic scenes with moving cameras. The dataset is split into two complementary subsets:
 
-DynOPETs is split into two complementary subsets:
-### COPE119
-119 sequences covering 6 common categories from the COPE benchmark: bottles, bowls, cameras, cans, laptops, mugs.
-Designed for COPE (Category-level Pose Estimation) methods.
+### 🏷️ COPE119
+- **119 sequences** covering **6 common categories** from the COPE benchmark
+- **Categories**: bottles, bowls, cameras, cans, laptops, mugs
+- **Purpose**: Designed for COPE (Category-level Pose Estimation) methods
+- **Size**: 41.42GB
+- **[Download Link](https://drive.google.com/drive/folders/1v2gDBpawSnMnq5O3b12ePfEp1MyJ4TwK?usp=drive_link)**
 
-**[Download](https://drive.google.com/drive/folders/1v2gDBpawSnMnq5O3b12ePfEp1MyJ4TwK?usp=drive_link) (41.42GB)** [Training Set](https://drive.google.com/drive/folders/1v2gDBpawSnMnq5O3b12ePfEp1MyJ4TwK?usp=drive_link) / [Test Set](https://drive.google.com/drive/folders/1v2gDBpawSnMnq5O3b12ePfEp1MyJ4TwK?usp=drive_link)
-### UOPE56
-56 sequences of unconstrained household objects. Tailored for UOPE (Unseen Object Pose Estimation) methods.
+### 🔍 UOPE56
+- **56 sequences** of unconstrained household objects
+- **Purpose**: Tailored for UOPE (Unseen Object Pose Estimation) methods
+- **Size**: 18.24GB
+- **[Download Link](https://drive.google.com/drive/folders/1wYSwy-MKwDPFuEDXHD0GnnfS7Bg6Ft85?usp=drive_link)**
 
-**[Download](https://drive.google.com/drive/folders/1wYSwy-MKwDPFuEDXHD0GnnfS7Bg6Ft85?usp=drive_link) (18.24GB)**
+---
+## Annotation Pipeline
+
+<p align="center">
+  <img src="assets/pipeline.png" alt="Annotation Pipeline" width="95%">
+</p>
 
 ---
 
-## DynOPETs Toolbox
-
-### Environment Preparation 
+## 📦 Setup
 ```
 conda create -n dynopets python=3.10
 conda activate dynopets
 pip install -r requirements.txt
 ```
+## 📦 Modules
+
+### 📊 Global Kalman Filter
+
+```
+python src/abs_pose_global_kf.py --seqs_id bottle_00 --vis_on_subplots 
+```
+
+The Global Kalman Filter module performs pose smoothing on initial absolute poses. The initial absolute poses can be obtained from methods like **FoundationPose** / **BundleSDF**.
+
+**Key Features:**
+- Forward Part: **Extended Kalman Filter (EKF)** for rotation and translation smoothing
+- Backward Part: **Rauch-Tung-Striebel (RTS)** backward smoothing for optimal state estimation
+- **TUM format** input/output for pose trajectories
+
+**Input Data Format:**
+- `poses`: TUM format pose file with timestamps and 4x4 transformation matrices
+- `fps`: Frame rate for temporal dynamics modeling (default: 15 Hz)
+
+**Output:**
+- Smoothed pose trajectories in TUM format
+- Euler angle comparison plots (raw, forward optimized, backward optimized)
+- State covariance matrices for uncertainty quantification
+
+### 📊 Relative Pose Post-Processing
+
+```
+python src/relative_pose_post_processing.py  
+```
+The Relative Pose Post-Processing module refines camera poses using visual tracking and depth information.
+
+**Key Features:**
+- **RANSAC-based Pose Estimation** with Arun's method for robust 3D-3D point alignment
+- **Covariance Estimation** using numerical Jacobian for pose uncertainty quantification
+
+**Input Data Format:**
+- `tracks`: Visual feature tracks with shape `[frame, num_points, xy_coordinates]` (**Cotracker** / **VGGSfM** scaled coordinates)
+- `depth_images`: Depth image sequence with shape `[frame, H, W]` stored as `.npy` file
+- `intrinsics`: Camera intrinsic matrix with shape `[fx, fy, cx, cy]`
+
+**Output:**
+- `relative_poses`: List of 4x4 relative transformation matrices between consecutive frames
+- `relative_covariances`: List of 6x6 covariance matrices for uncertainty quantification
+- Optimized object poses for downstream Pose Graph Optimization
+
+
+
+### 📊 Pose Graph Optimization
+
+```
+python src/pose_graph_optimization.py
+```
+The Pose Graph Optimization module performs global optimization of object poses using relative pose constraints and absolute pose priors.
+
+**Key Features:**
+- **GTSAM**-based pose graph optimization.
+- Combines **Absolute Pose Priors** with **Relative Pose constraints**.
+- Support for marking **Unreliable Frames** with adjustable prior weights.
+- **Levenberg-Marquardt** optimization with decoupled translation/rotation covariances.
+- Flexible prior weight configuration (e.g., **1e-5** for first frame, **1e-3** for others).
+
+**Input Data Format:**
+- `relative_poses`: Relative poses between consecutive frames (from **Relative Pose Post-Processing**)
+- `covariances`: 6x6 covariance matrices for pose uncertainty estimation (from **Relative Pose Post-Processing**)
+- `absolute_poses`: Absolute pose estimates (from **Global Kalman Filter**)
+- `prior_weights`: Weights for absolute pose constraints (e.g., 1e-5 for first frame, 1e-3 for others)
+
+**Output:**
+- Optimized 4x4 pose matrices for all frames
+
+
+
+## 🛠️ DynOPETs Toolbox
+
 
 ### Object Pose Visualization Tool
 ```
@@ -123,13 +210,6 @@ python cloud_generater.py --subset COPE119 --seqs bottle_00
 
 
 
-## Annotation Pipeline
-
-<p align="center">
-  <img src="assets/pipeline.png" alt="Annotation Pipeline" width="95%">
-</p>
-
----
 
 ## Dataset Format
 
@@ -164,37 +244,6 @@ bottle (example)
 ### COPE119 [Trainset](COPE119/COPE119_trainset_list.txt), [Testset](COPE119/COPE119_testset_list.txt) 
 
 
-
-
-<!-- ```
-- bottle (00, 05, 06, 08, 09, 10, 12, 14, 15, 16, 17, 18, 19, 20, 21, 22, 24, 25, 26, 27, 28, 29)
-
-- bowl (00, 01, 02, 04, 05, 07, 08, 09, 12, 14, 15, 16, 17, 19, 20)
-
-- camera (00, 02, 03, 06, 07, 08)
-
-- can (00, 02, 04, 05, 06, 07, 08, 10, 11, 12, 16, 17, 18, 19, 21)
-
-- laptop (01, 02, 03, 05, 07, 08, 10, 11)
-
-- mug (00, 02, 04, 05, 07, 09, 10, 13, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24)
-``` -->
-
-### 
-<!-- ```
-- bottle (02, 03, 04, 05, 08, 12, 14, 24)
-
-- bowl (04, 07, 11, 12, 14, 19)
-
-- camera (02, 05, 06)
-
-- can (02, 04, 10, 14, 15, 16, 21)
-
-- laptop (01, 05, 07, 10)
-
-- mug (02, 04, 07, 09, 12, 13, 15)
-``` -->
-
 ## Devices & Softwares
 
 - RGB-D Camera: [Structure Sensor](https://structure.io/) with iPad Pro
@@ -222,7 +271,7 @@ If you have any questions, please feel free to contact us:
 
 [Xiangting Meng](https://github.com/Launch-on-Titania): [mengxt@shanghaitech.edu.cn](mailto:mengxt@shanghaitech.edu.cn), [arnoxtmann@gmail.com](mailto:arnoxtmann@gmail.com)
 
-[Jiaqi Yang](https://github.com/Jiaqi-Yang): [yangjq1202@shanghaitech.edu.cn](mailto:yangjq1202@shanghaitech.edu.cn)
+[Jiaqi Yang](https://github.com/Jiaqi-Yang): [yangjq12022@shanghaitech.edu.cn](mailto:yangjq12022@shanghaitech.edu.cn)
 
 ## Citation
 ```bibtex
@@ -233,6 +282,11 @@ If you have any questions, please feel free to contact us:
   year={2025}
 }
 ```
+
+## Acknowledgments
+We would like to thank the following works:
+[FoundationPose](https://github.com/NVlabs/FoundationPose), [BundleSDF](https://github.com/NVlabs/BundleSDF), [CoTracker](https://github.com/facebookresearch/co-tracker), [VGGSfM](https://github.com/facebookresearch/vggsfm)
+
 
 ## License
 This project is released under the [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) license. See [LICENSE](LICENSE) for additional details.
