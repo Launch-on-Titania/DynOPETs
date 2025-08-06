@@ -61,7 +61,7 @@ Xiangting Meng* · Jiaqi Yang* · Mingshu Chen · Chenxin Yan · Yujiao Shi · W
 
 ---
 
-## 📦 Setup
+## 🚀 Setup
 ```
 conda create -n dynopets python=3.10
 conda activate dynopets
@@ -69,7 +69,7 @@ pip install -r requirements.txt
 ```
 ## 📦 Modules
 
-### 📊 Global Kalman Filter
+### ✨ Global Kalman Filter
 
 ```
 python src/abs_pose_global_kf.py --seqs_id bottle_00 --vis_on_subplots 
@@ -89,9 +89,8 @@ The Global Kalman Filter module performs pose smoothing on initial absolute pose
 **Output:**
 - Smoothed pose trajectories in TUM format
 - Euler angle comparison plots (raw, forward optimized, backward optimized)
-- State covariance matrices for uncertainty quantification
 
-### 📊 Relative Pose Post-Processing
+### ✨ Relative Pose Post-Processing
 
 ```
 python src/relative_pose_post_processing.py  
@@ -104,17 +103,16 @@ The Relative Pose Post-Processing module refines camera poses using visual track
 
 **Input Data Format:**
 - `tracks`: Visual feature tracks with shape `[frame, num_points, xy_coordinates]` (**Cotracker** / **VGGSfM** scaled coordinates)
-- `depth_images`: Depth image sequence with shape `[frame, H, W]` stored as `.npy` file
+- `depth_images`: Depth image sequence with shape `[frame, H, W]`
 - `intrinsics`: Camera intrinsic matrix with shape `[fx, fy, cx, cy]`
 
 **Output:**
 - `relative_poses`: List of 4x4 relative transformation matrices between consecutive frames
 - `relative_covariances`: List of 6x6 covariance matrices for uncertainty quantification
-- Optimized object poses for downstream Pose Graph Optimization
 
 
 
-### 📊 Pose Graph Optimization
+### ✨ Pose Graph Optimization
 
 ```
 python src/pose_graph_optimization.py
@@ -125,7 +123,6 @@ The Pose Graph Optimization module performs global optimization of object poses 
 - **GTSAM**-based pose graph optimization.
 - Combines **Absolute Pose Priors** with **Relative Pose constraints**.
 - Support for marking **Unreliable Frames** with adjustable prior weights.
-- **Levenberg-Marquardt** optimization with decoupled translation/rotation covariances.
 - Flexible prior weight configuration (e.g., **1e-5** for first frame, **1e-3** for others).
 
 **Input Data Format:**
