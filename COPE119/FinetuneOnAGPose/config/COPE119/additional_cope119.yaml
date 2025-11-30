@@ -1,0 +1,4 @@
+rgb_pattern: "/color/*_color.png"
+depth_pattern: "/depth/*_depth.png"
+mask_pattern: "/mask/*_mask.png"
+intrinsics_pattern: "/intrinsics.txt"

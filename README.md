@@ -1,7 +1,7 @@
 <h1 align="center">Dyn<span style="color: green;">OPETs</span>: A Versatile Benchmark for Dynamic <span style="color: green;">O</span>bject <span style="color: green;">P</span>ose <span style="color: green;">E</span>stimation and <span style="color: green;">T</span>racking in Moving Camera <span style="color: green;">S</span>enarios</h1>
 
 <p align="center" style="font-size: larger; color: #d73027; font-weight: bold;">
-🎉 Accepted at RA-L 2025! 🎉
+🎉🎉 Accepted at RA-L 2025! 🎉🎉
 </p>
 
 <p align="center" style="font-size: larger;">
@@ -26,6 +26,7 @@ Xiangting Meng* · Jiaqi Yang* · Mingshu Chen · Chenxin Yan · Yujiao Shi · W
 
 ## 📢 Updates
 
+- **[November 30, 2024]** 🚀 Released COPE119 Finetuning Toolkit based on AG-Pose (CVPR 2024)! Complete training and evaluation pipeline for category-level 6D pose estimation on COPE119 dataset.
 - **[July 22, 2025]** 🎉🎉 DynOPETs is now accepted on RA-L 2025.
 - **[June 23, 2025]** 🎉 DynOPETs is now open source! We also provide visualization tools for rendering object models to facilitate learning and usage.
 
@@ -138,6 +139,20 @@ The Pose Graph Optimization module performs global optimization of object poses 
 
 ## 🛠️ DynOPETs Toolbox
 
+### 🎯 COPE119 Finetuning Toolkit
+
+We provide a complete finetuning implementation based on [AG-Pose (CVPR 2024)](https://arxiv.org/abs/2403.19527) for category-level 6D pose estimation on COPE119 dataset.
+
+**Supported Categories**: bottle, bowl, camera, can, laptop, mug
+
+**Key Features**:
+- ✅ Pre-configured for COPE119 dataset format
+- ✅ Dynamic camera intrinsics loading
+- ✅ Complete training and evaluation pipeline
+
+**Quick Start**:
+#### **📖 Detailed Documentation**: 
+  See [COPE119/FinetuneOnAGPose/README.md](COPE119/FinetuneOnAGPose/README.md) for complete setup, configuration, and usage instructions.
 
 ### Object Pose Visualization Tool
 ```
@@ -226,6 +241,7 @@ DynOPETs
 
 bottle (example)
   ├── bottle_00
+  |     ├── intrinsics.txt
   │     ├── cam_annotations 
   │     │         ├── gripper2base.npy
   │     │         └── gripper_tstamps.npy
@@ -268,7 +284,7 @@ If you have any questions, please feel free to contact us:
 
 [Xiangting Meng](https://github.com/Launch-on-Titania): [mengxt@shanghaitech.edu.cn](mailto:mengxt@shanghaitech.edu.cn), [arnoxtmann@gmail.com](mailto:arnoxtmann@gmail.com)
 
-[Jiaqi Yang](https://github.com/Jiaqi-Yang): [yangjq12022@shanghaitech.edu.cn](mailto:yangjq12022@shanghaitech.edu.cn)
+[Jiaqi Yang](https://github.com/greatoyster): [yangjq12022@shanghaitech.edu.cn](mailto:yangjq12022@shanghaitech.edu.cn)
 
 ## Citation
 ```bibtex
